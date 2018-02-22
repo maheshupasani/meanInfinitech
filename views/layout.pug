@@ -114,9 +114,9 @@ html(ng-app="main")
                       span.sr-only (current)
                   li.menu__item
                     a.menu__link(href='about.html') About
-                  li.dropdown.menu__item
+                  li.dropdown.menu__item(ng-repeat="ans in cat")
                     a.dropdown-toggle.menu__link(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                      | Men's wear 
+                      | {{ans.cat_name}}
                       span.caret
                     ul.dropdown-menu.multi-column.columns-3
                       .agile_inner_drop_nav_info
@@ -204,7 +204,7 @@ html(ng-app="main")
                       b.caret
                     ul.dropdown-menu.agile_short_dropdown
                       li
-                        a(href='icons.html') Web Icons
+                        a(href='/category') Add Category
                       li
                         a(href='typography.html') Typography
                   li.menu__item
@@ -453,22 +453,22 @@ html(ng-app="main")
             li  Footwear
           .resp-tabs-container
             // /tab_one
-            .tab1
-              .col-md-3.product-men
+            .tab1(ng-controller="productCtrl")
+              .col-md-3.product-men(ng-repeat="ans in products")
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
-                    img.pro-image-front(src='/public/images/m1.jpg', alt='')
-                    img.pro-image-back(src='/public/images/m1.jpg', alt='')
+                    img.pro-image-front(src='/public/uploads/{{ans.pro_path}}', alt='')
+                    img.pro-image-back(src='/public/uploads/{{ans.pro_path}}', alt='')
                     .men-cart-pro
                       .inner-men-cart-pro
                         a.link-product-add-cart(href='single.html') Quick View
                     span.product-new-top New
                   .item-info-product
                     h4
-                      a(href='single.html') Formal Blue Shirt
+                      a(href='single.html') {{ans.pro_name}}
                     .info-product-price
-                      span.item_price $45.99
-                      del $69.71
+                      span.item_price {{ans.pro_price-(ans.pro_price*ans.pro_disc/100) | number:0}}
+                      del  {{ans.pro_price}}
                     .snipcart-details.top_brand_home_details.item_add.single-item.hvr-outline-out.button2
                       form(action='#', method='post')
                         fieldset
@@ -482,7 +482,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/m2.jpg', alt='')
@@ -510,7 +510,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/m3.jpg', alt='')
@@ -538,7 +538,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/m4.jpg', alt='')
@@ -566,7 +566,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/m5.jpg', alt='')
@@ -594,7 +594,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/m7.jpg', alt='')
@@ -622,7 +622,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/m6.jpg', alt='')
@@ -650,7 +650,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/m8.jpg', alt='')
@@ -681,8 +681,8 @@ html(ng-app="main")
               .clearfix
             // //tab_one
             // /tab_two
-            .tab2
-              .col-md-3.product-men
+            //.tab2
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/w1.jpg', alt='')
@@ -710,7 +710,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/w2.jpg', alt='')
@@ -738,7 +738,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/w3.jpg', alt='')
@@ -766,7 +766,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/w4.jpg', alt='')
@@ -794,7 +794,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/w5.jpg', alt='')
@@ -822,7 +822,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/w6.jpg', alt='')
@@ -850,7 +850,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/w7.jpg', alt='')
@@ -878,7 +878,7 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .col-md-3.product-men
+              //.col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
                     img.pro-image-front(src='/public/images/w8.jpg', alt='')
@@ -906,9 +906,9 @@ html(ng-app="main")
                           input(type='hidden', name='return', value=' ')
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
-              .clearfix
+              //.clearfix
             // //tab_two
-            .tab3
+            //.tab3
               .col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item
@@ -1134,7 +1134,7 @@ html(ng-app="main")
                           input(type='hidden', name='cancel_return', value=' ')
                           input.button(type='submit', name='submit', value='Add to cart')
               .clearfix
-            .tab4
+            //.tab4
               .col-md-3.product-men
                 .men-pro-item.simpleCart_shelfItem
                   .men-thumb-item

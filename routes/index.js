@@ -1,4 +1,4 @@
-var general = require(__dirname+"/general")
+var general = require(__dirname+"/general");
 var express = require('express');
 var router = express.Router();
 
@@ -6,9 +6,27 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
-router.get('/menu', function(req, res, next) {
-  res.send('Hello')
-  console.log(general.select)
-});
 
+router.get('/menu',function(req,res,next){
+	// res.send("hello");
+	general.select('*','category',1,function(a,b){
+		console.log(a)
+		if (b) {
+			res.send(JSON.stringify(b))
+		}else{
+			console.log(a)
+		}
+	})
+})
+router.get('/allProduct',function(req,res,next){
+	// res.send("hello");
+	general.select('*','product',1,function(a,b){
+		console.log(a)
+		if (b) {
+			res.send(JSON.stringify(b))
+		}else{
+			console.log(a)
+		}
+	})
+})
 module.exports = router;
