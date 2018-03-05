@@ -1,0 +1,27 @@
+html(ng-app="main")
+	head
+		link(href='/public/css/bootstrap.css', rel='stylesheet', type='text/css', media='all')
+		script(src="/public/js/angular.min.js")
+		script(src="/public/js/main.js")
+		script(src="/public/js/angular-cookies.min.js")
+	body
+		.cart(ng-controller="cartCtrl")
+			h1 Cart
+			.table-responsive
+				table.table-bordered
+					thead
+						tr
+							th Pro_id
+							th Pro_name
+							th Pro_image
+							th Pro_price
+					tbody
+						tr(ng-repeat="pro in products")
+							td {{pro.id}}
+							td {{pro.pro_name}}
+							td
+								img.pro-image-front(src='/public/uploads/{{pro.pro_path}}', alt='',style="width:150px")
+							td {{pro.pro_price-(pro.pro_price*pro.pro_disc/100) | number:0}}
+							td
+								a(type="button",ng-click="del_from_cart($event,pro.id)") Del
+		
