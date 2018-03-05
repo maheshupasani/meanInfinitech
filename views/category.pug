@@ -1,0 +1,10 @@
+html(ng-app="main")
+  body
+    script(type='text/javascript', src='/public/js/angular.min.js')
+    script(type='text/javascript', src='/public/js/main.js')
+    form(ng-controller="catCtrl")
+      .form-group
+        label(for='email') Category:
+        input#email.form-control(type='text', placeholder='Enter email', ng-model='cat_name')
+      button.btn.btn-default(type='button',ng-click="add()") Submit
+      p(ng-bind="err")
