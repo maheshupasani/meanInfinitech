@@ -108,4 +108,21 @@ app.controller('registerCtrl', function ($scope,postData) {
 	}
 });
 
+app.controller('loginCtrl',function($scope,postData,$window){
+	$scope.signIn = function(){
+		console.log($scope.loginForm)
+		if(!$scope.loginForm){
+			$scope.loginErr = 'please Enter correct credentials';
+		}else{
+			postData.post('loginAction',$scope.loginForm,function(result){
 
+				// console.log(result);
+				if(result == 'ok'){
+					$window.location.href= path;
+				}else{
+					$scope.loginErr = result;
+				}
+			})
+		}
+	}
+})

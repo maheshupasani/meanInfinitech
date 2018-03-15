@@ -34,20 +34,30 @@ html(ng-app="main")
     #home.header
       .container
         ul
-          li
-            a(href='#', data-toggle='modal', data-target='#myModal')
-              i.fa.fa-unlock-alt(aria-hidden='true')
-              |  Sign In
-          li
-            a(href='#', data-toggle='modal', data-target='#myModal2')
-              i.fa.fa-pencil-square-o(aria-hidden='true')
-              |  Sign Up
-          li
-            i.fa.fa-phone(aria-hidden='true')
-            |  Call : 01234567898
-          li
-            i.fa.fa-envelope-o(aria-hidden='true')
-            a(href='mailto:info@example.com') info@example.com
+          if locals.user_email
+            li
+              a(href='#', data-toggle='modal', data-target='#myModal')
+                i.fa.fa-unlock-alt(aria-hidden='true')
+                |  Logout
+            li
+              a(href='#', data-toggle='modal', data-target='#myModal')
+                i.fa.fa-unlock-alt(aria-hidden='true')
+                |  Change Password (#{locals.user_name})
+          else
+            li
+              a(href='#', data-toggle='modal', data-target='#myModal')
+                i.fa.fa-unlock-alt(aria-hidden='true')
+                |  Sign In
+            li
+              a(href='#', data-toggle='modal', data-target='#myModal2')
+                i.fa.fa-pencil-square-o(aria-hidden='true')
+                |  Sign Up
+            li
+              i.fa.fa-phone(aria-hidden='true')
+              |  Call : 01234567898
+            li
+              i.fa.fa-envelope-o(aria-hidden='true')
+              a(href='mailto:info@example.com') info@example.com
     // //header
     // header-bot
     .header-bot
@@ -223,7 +233,7 @@ html(ng-app="main")
     #myModal.modal.fade(tabindex='-1', role='dialog')
       .modal-dialog
         // Modal content
-        .modal-content
+        .modal-content(ng-controller="loginCtrl")
           .modal-header
             button.close(type='button', data-dismiss='modal') ×
           .modal-body.modal-body-sub_agile
@@ -231,16 +241,17 @@ html(ng-app="main")
               h3.agileinfo_sign
                 | Sign In 
                 span Now
+              p {{loginErr}}
               form(action='#', method='post')
                 .styled-input.agile-styled-input-top
-                  input(type='text', name='Name', required='')
-                  label Name
-                  span
-                .styled-input
-                  input(type='email', name='Email', required='')
+                  input(type='email', name='email', ng-model='loginForm.email')
                   label Email
                   span
-                input(type='submit', value='Sign In')
+                .styled-input
+                  input(type='password', name='password', ng-model='loginForm.password')
+                  label Password
+                  span
+                input(type='button', value='Sign In',ng-click="signIn()")
               ul.social-nav.model-3d-0.footer-social.w3_agile_social.top_agile_third
                 li
                   a.facebook(href='#')
